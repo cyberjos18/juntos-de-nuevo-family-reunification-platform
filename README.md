@@ -1,99 +1,104 @@
 # Juntos de Nuevo (Reencuentro)
 
-Plataforma web humanitaria para facilitar la reunificación de niños, niñas y adolescentes separados de sus familias tras emergencias (terremotos en Venezuela). Permite que centros de acogida registren a los menores bajo su cuidado y que familiares los localicen públicamente para iniciar el proceso de reencuentro.
+[![CI](https://github.com/cyberjos18/juntos-de-nuevo-family-reunification-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/cyberjos18/juntos-de-nuevo-family-reunification-platform/actions/workflows/ci.yml)
 
-**Sitio en producción:** https://juntosdenuevo.org
+A humanitarian web platform that helps reunite children and adolescents with their families after they have been separated by an emergency (earthquakes in Venezuela). Shelters register the minors in their care, and relatives can find them publicly to start the reunification process.
 
-> Proyecto humanitario sin fines de lucro. Maneja datos sensibles de menores — cualquier cambio debe priorizar seguridad, privacidad e integridad de los datos.
+**Live site:** https://juntosdenuevo.org
+
+> Non-profit humanitarian project. It handles sensitive data about minors — every change must put security, privacy and data integrity first.
 
 ---
 
-## Roles y accesos
+## Roles and access
 
-| Rol | Descripción | Acceso |
-|-----|-------------|--------|
-| **Público** | Cualquier persona buscando a un familiar | Solo lectura: listado y ficha pública de niños |
-| **Gestor** | Personal de un centro de acogida | Registrar niños, gestionar recogidas de su propio centro |
-| **Administrador** | Superusuario | Validar centros, gestionar usuarios, configuración, visión global |
+| Role | Description | Access |
+|------|-------------|--------|
+| **Public** | Anyone looking for a relative | Read only: public list and profile of each child |
+| **Gestor** (shelter staff) | Staff of a single shelter | Register children, handle pickups for their own shelter |
+| **Administrador** | Superuser | Validate shelters, manage users and configuration, global view |
 
-## Funcionalidades principales
+## Main features
 
-- Registro público de niños encontrados (foto + datos básicos), visibles en la home
-- Ficha detallada por niño (`/ninos/{nino}`)
-- Registro y activación de centros de acogida por email
-- Gestión de usuarios Gestor por parte del Administrador
-- Proceso de **recogida**: registro del familiar que retira al menor, con evidencia fotográfica (cambio de estado irreversible)
-- Configuración del proveedor de email transaccional (Brevo)
+- Public registry of found children (photo and basic data), listed on the home page
+- Detailed profile per child (`/ninos/{nino}`)
+- Shelter sign-up with activation by email
+- Administrator-managed Gestor accounts
+- **Pickup process** (`recogida`): records the relative who collects the minor, with photographic evidence — an irreversible state change
+- Configuration of the transactional email provider (Brevo)
 
-Reglas de negocio clave en [`docs/software-plan.md`](juntos-de-nuevo/docs/software-plan.md).
+The key business rules live in [`docs/software-plan.md`](juntos-de-nuevo/docs/software-plan.md).
 
-## Stack técnico
+## Tech stack
 
 - **Backend:** Laravel 13 / PHP 8.3
 - **Frontend:** Blade + Alpine.js + Tailwind CSS 4 (Vite)
-- **Base de datos:** MySQL 8
-- **Auth API:** Laravel Sanctum
+- **Database:** MySQL 8
+- **API auth:** Laravel Sanctum
 - **Email:** Brevo (`app/Services/BrevoMailService.php`)
 - **Tests:** Pest 4 / PHPUnit
 
-## Arquitectura del código
+## Code architecture
 
-El proyecto separa responsabilidades más allá del MVC estándar de Laravel:
+The project separates responsibilities beyond Laravel's standard MVC:
 
 ```
 app/
 ├── Http/Controllers/
-│   ├── Web/            # Controladores de vistas Blade (Auth, Gestor, Admin)
-│   └── Api/             # Controladores de la API (Sanctum)
+│   ├── Web/              # Blade view controllers (Auth, Gestor, Admin)
+│   └── Api/              # API controllers (Sanctum)
 ├── Http/Middleware/      # CheckRole, EnsureCentroActivo
 ├── Models/               # Eloquent: Centro, Nino, NinoFamiliar, Recogida, User, Configuracion
-├── Persistencia/         # Capa de repositorios sobre los modelos
-├── Validaciones/         # Form requests / reglas de validación por caso de uso
-├── Services/             # Integraciones externas (Brevo, config de mail)
-└── Mail/                 # Mailables (activación de centro, notificaciones)
+├── Persistencia/         # Repository layer on top of the models
+├── Validaciones/         # Validation rules, one class per use case
+├── Services/             # External integrations (Brevo, mail configuration)
+└── Mail/                 # Mailables (shelter activation, notifications)
 ```
 
-## Puesta en marcha local
+## Local setup
 
-Requisitos: PHP 8.3, Composer, Node 20+, MySQL 8 (en este entorno se usa WAMP64).
+Requirements: PHP 8.3, Composer, Node 20+, MySQL 8 (this environment uses WAMP64).
 
 ```bash
+cd juntos-de-nuevo
+
 composer install
 npm install
 
-cp .env.example .env   # completar credenciales de BD y mail
+cp .env.example .env   # fill in the database and mail credentials
 php artisan key:generate
 ```
 
-**Importante — base de datos:** las tablas principales (`centros`, `ninos`, `ninos_familiares`, `recogidas`, `configuracion`) no se crean con `php artisan migrate`; se definieron primero como scripts SQL puros. Estos scripts no fijan ni crean una base de datos por sí mismos — se ejecutan contra la que ya hayas seleccionado en la conexión, así que créala y apúntala tú antes de importar:
+**Important — the database:** the main tables (`centros`, `ninos`, `ninos_familiares`, `recogidas`, `configuracion`) are *not* created by `php artisan migrate`; they were defined first as plain SQL scripts. Those scripts neither create nor select a database on their own — they run against whichever database the connection already points to, so create it and point to it yourself before importing:
 
 ```bash
-mysql -u <usuario> -p -e "CREATE DATABASE <base_de_datos> DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci"
-mysql -u <usuario> -p <base_de_datos> < docs/database-script.sql
-mysql -u <usuario> -p <base_de_datos> < docs/laravel-aux-tables.sql
-mysql -u <usuario> -p <base_de_datos> < docs/configuracion-table.sql
-php artisan migrate   # solo tablas propias de Laravel (personal_access_tokens ya viene del script; esto aplica migraciones nuevas futuras)
+mysql -u <user> -p -e "CREATE DATABASE <database> DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci"
+mysql -u <user> -p <database> < docs/database-script.sql
+mysql -u <user> -p <database> < docs/laravel-aux-tables.sql
+mysql -u <user> -p <database> < docs/configuracion-table.sql
+php artisan migrate   # Laravel's own tables only (personal_access_tokens already
+                      # comes from the script; this applies future migrations)
 ```
 
-Levantar el entorno de desarrollo:
+Start the development environment:
 
 ```bash
-composer run dev   # servidor, queue listener, logs (pail) y vite en paralelo
+composer run dev   # server, queue listener, logs (pail) and vite in parallel
 ```
 
 ## Tests
 
-Los tests están escritos en [Pest](https://pestphp.com) (sobre PHPUnit), organizados en dos suites:
+The tests are written in [Pest](https://pestphp.com) (on top of PHPUnit) and split into two suites:
 
 ```
 tests/
-├── Feature/   # HTTP end-to-end: rutas Web (Blade) y API (Sanctum), por rol
-└── Unit/      # Lógica de modelos en aislamiento (scopes, helpers de estado)
+├── Feature/   # End-to-end HTTP: Web (Blade) and API (Sanctum) routes, per role
+└── Unit/      # Model logic in isolation (scopes, state helpers)
 ```
 
-**Importante — base de datos de test:** los tests usan una base MySQL real y separada (`findchild_test`), no SQLite en memoria, porque dependen de las mismas restricciones de integridad referencial (`FOREIGN KEY`, `NOT NULL`) que producción. Cada test corre dentro de una transacción que se revierte al finalizar (`DatabaseTransactions`), así que los datos fijos de prueba no se pierden entre tests.
+**Important — the test database:** the tests run against a real, separate MySQL database (`findchild_test`) rather than in-memory SQLite, because they rely on the same referential integrity constraints as production (`FOREIGN KEY`, `NOT NULL`). Each test runs inside a transaction that is rolled back afterwards (`DatabaseTransactions`), so the fixtures survive between tests.
 
-Configuración esperada (ver `phpunit.xml`): MySQL en `127.0.0.1:3307`, base `findchild_test`. Antes de correr los tests por primera vez:
+Expected configuration (see `phpunit.xml`): MySQL on `127.0.0.1:3307`, database `findchild_test`. Before running the tests for the first time:
 
 ```bash
 mysql -u root -P 3307 -e "CREATE DATABASE findchild_test DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci"
@@ -102,43 +107,47 @@ mysql -u root -P 3307 findchild_test < docs/laravel-aux-tables.sql
 mysql -u root -P 3307 findchild_test < docs/configuracion-table.sql
 ```
 
-Los datos de prueba (`docs/database-script.sql`) incluyen usuarios y niños con IDs fijos que los tests referencian directamente (ej. `admin@findchild.org` / `admin123`, niño `#1` del centro "Protección Civil", niño `#4` ya recogido). Ver credenciales exactas en las cabeceras del propio script SQL y en `tests/Helpers.php` (funciones `adminUser()`, `gestorUser()`, `gestorHospitalUser()`).
+The fixtures in `docs/database-script.sql` include users and children with fixed IDs that the tests reference directly (for example child `#1` of the "Protección Civil" shelter, and child `#4`, already picked up). The exact credentials are documented in the headers of the SQL script itself and in `tests/Helpers.php` (`adminUser()`, `gestorUser()`, `gestorHospitalUser()`).
 
-Ejecutar los tests:
+Run the tests:
 
 ```bash
 php artisan test
-# o directamente
+# or directly
 ./vendor/bin/pest
 ```
 
-### Qué cubren
+### What they cover
 
-- **Autenticación** (web y API): login, logout, registro de centro, activación por token, cuentas inactivas
-- **Roles y permisos**: un Gestor nunca opera sobre datos de otro centro; rutas de Admin bloqueadas para Gestor y viceversa
-- **`EnsureCentroActivo`**: un Gestor de un centro aún no validado por el Admin no puede crear niños, listar los suyos ni registrar recogidas (ni por web ni por API)
-- **Niños**: registro, ficha pública vs. autenticada (oculta datos sensibles a visitantes anónimos), validaciones de edad/sexo/estado
-- **Recogidas**: solo una vez por niño (estado irreversible), foto de evidencia obligatoria
-- **Emails transaccionales**: se verifica con `Mail::fake()` que se despachan `ActivarCentroMail`, `NuevoCentroPendienteMail` y `CentroActivadoMail` en los flujos de registro y validación de centro
-- **Modelos** (`Unit`): scopes de `Nino` (`encontrados`, `recogidos`, `familiaLocalizada`, `porCentro`) y helpers de rol/estado de `User` y `Nino`
+- **Authentication** (web and API): login, logout, shelter sign-up, activation by token, inactive accounts
+- **Roles and permissions:** a Gestor never operates on another shelter's data; Admin routes are blocked for a Gestor and vice versa
+- **`EnsureCentroActivo`:** a Gestor whose shelter has not yet been validated by an Administrador cannot create children, list their own, or register pickups — neither over the web nor over the API
+- **Children:** registration, public profile vs. authenticated profile (sensitive data is hidden from anonymous visitors), validation of age, sex and state
+- **Pickups:** only once per child (an irreversible state), evidence photo required
+- **Transactional emails:** `Mail::fake()` asserts that `ActivarCentroMail`, `NuevoCentroPendienteMail` and `CentroActivadoMail` are dispatched during shelter sign-up and validation
+- **Models** (`Unit`): `Nino` scopes (`encontrados`, `recogidos`, `familiaLocalizada`, `porCentro`) and the role/state helpers on `User` and `Nino`
 
-## Documentación adicional
+### Continuous integration
 
-La carpeta [`docs/`](docs/) contiene los documentos de diseño y handoff del proyecto:
+[`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs the suite on GitHub Actions against a MySQL 8 service container: it installs the PHP extensions, imports the three SQL scripts and runs `php artisan test`. The repository also keeps [`bitbucket-pipelines.yml`](bitbucket-pipelines.yml), the equivalent pipeline for the Bitbucket mirror of this project.
 
-- `software-plan.md` — objetivo, alcance del MVP, reglas de negocio
-- `database-handoff.md` / `database-script.sql` / `laravel-aux-tables.sql` / `configuracion-table.sql` — modelo de datos
-- `backend-handoff.md`, `frontend-handoff.md`, `blade-handoff.md` — decisiones de implementación
-- `blade-security-rules.md` — reglas de seguridad para las vistas
-- `reset-datos-mantener-admin.sql` — script para limpiar datos de prueba conservando el usuario admin
+## Further documentation
 
-## Seguridad
+The [`docs/`](juntos-de-nuevo/docs/) directory holds the project's design and handoff documents:
 
-Este sistema almacena información de menores en situación vulnerable (ubicación, estado, datos de quien los retira). Antes de desplegar cambios, verificar:
+- `software-plan.md` — objective, MVP scope, business rules
+- `database-handoff.md` / `database-script.sql` / `laravel-aux-tables.sql` / `configuracion-table.sql` — data model
+- `backend-handoff.md`, `frontend-handoff.md`, `blade-handoff.md` — implementation decisions
+- `blade-security-rules.md` — security rules for the views
+- `reset-datos-mantener-admin.sql` — script to wipe test data while keeping the admin user
 
-- Reglas de acceso por rol (`CheckRole`, `EnsureCentroActivo`)
-- Que un Gestor solo pueda operar sobre los niños de su propio centro
-- Que los datos de contacto (teléfono, email) no se expongan en endpoints públicos
-- Validación de las clases en `app/Validaciones/` antes de cualquier escritura
+## Security
 
-Si detectas una vulnerabilidad, repórtala de forma responsable antes de discutirla públicamente.
+This system stores information about minors in a vulnerable situation: where they are, their state, and who collects them. Before deploying any change, verify:
+
+- The role-based access rules (`CheckRole`, `EnsureCentroActivo`)
+- That a Gestor can only operate on children from their own shelter
+- That contact details (phone, email) are never exposed on public endpoints
+- That the classes in `app/Validaciones/` validate the input before any write
+
+If you find a vulnerability, please report it responsibly before discussing it publicly.
