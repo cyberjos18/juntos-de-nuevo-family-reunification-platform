@@ -59,7 +59,7 @@ jobs:
 
     steps:
       - name: Check out the repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up PHP 8.4
         uses: shivammathur/setup-php@v2
@@ -68,6 +68,14 @@ jobs:
           extensions: pdo_mysql, zip, mbstring, gd, bcmath
           tools: composer:v2
           coverage: none
+
+      # phpdotenv reads .env with a suppressed file_get_contents, and PHPUnit 12
+      # reports even suppressed warnings -- without this file every test is
+      # marked as a warning instead of passing. The variables defined in the
+      # `env` block above still win, because Laravel loads .env immutably and
+      # never overwrites a variable that is already set.
+      - name: Create the .env file
+        run: cp .env.example .env
 
       - name: Install the MySQL client
         run: sudo apt-get update && sudo apt-get install -y --no-install-recommends mysql-client
@@ -84,7 +92,7 @@ jobs:
         run: composer validate --no-check-publish
 
       - name: Cache the Composer packages
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.cache/composer/files
           key: composer-${{ runner.os }}-php8.4-${{ hashFiles('juntos-de-nuevo/composer.lock') }}
