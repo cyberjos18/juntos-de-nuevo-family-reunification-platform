@@ -1,0 +1,13 @@
+# Esta carpeta contiene la aplicación Laravel completa y vive dentro del
+# document root (junto a index.php, que ha sido movido aquí desde public/).
+# Bloquea el acceso web directo a todo lo que no sean los assets públicos
+# ya expuestos en la raíz del sitio (index.php, favicon.ico, robots.txt,
+# /images, /build) y a las fotos servidas vía el symlink /storage.
+
+<IfModule mod_authz_core.c>
+    Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+</IfModule>
