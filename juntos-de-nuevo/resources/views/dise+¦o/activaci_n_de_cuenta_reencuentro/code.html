@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es-VE"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Activación de Cuenta - Reencuentro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght@8..144,25..151,100..1000&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-container": "#dae5ff",
+                    "on-tertiary-fixed": "#002204",
+                    "tertiary-container": "#25752b",
+                    "error": "#ba1a1a",
+                    "surface": "#f9f9ff",
+                    "surface-dim": "#d8dae2",
+                    "primary-container": "#1565c0",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#005db7",
+                    "tertiary-fixed": "#a3f69c",
+                    "inverse-primary": "#a9c7ff",
+                    "on-primary-fixed": "#001b3d",
+                    "primary-fixed": "#d6e3ff",
+                    "inverse-on-surface": "#eff0f9",
+                    "secondary-fixed-dim": "#afcbd8",
+                    "on-secondary-fixed": "#021f29",
+                    "secondary-fixed": "#cbe7f5",
+                    "surface-container-low": "#f2f3fb",
+                    "surface-container-high": "#e7e8f0",
+                    "surface-container-highest": "#e1e2ea",
+                    "error-container": "#ffdad6",
+                    "secondary-container": "#cbe7f5",
+                    "on-secondary-fixed-variant": "#304a55",
+                    "outline": "#727783",
+                    "outline-variant": "#c2c6d4",
+                    "surface-variant": "#e1e2ea",
+                    "on-primary-fixed-variant": "#00468c",
+                    "on-secondary-container": "#4e6874",
+                    "on-surface-variant": "#424752",
+                    "on-background": "#191c21",
+                    "inverse-surface": "#2e3037",
+                    "surface-container-lowest": "#ffffff",
+                    "primary": "#004d99",
+                    "tertiary": "#005c15",
+                    "tertiary-fixed-dim": "#88d982",
+                    "background": "#f9f9ff",
+                    "on-tertiary-container": "#a5f99e",
+                    "on-error-container": "#93000a",
+                    "surface-bright": "#f9f9ff",
+                    "secondary": "#48626e",
+                    "on-surface": "#191c21",
+                    "surface-container": "#ecedf6",
+                    "on-tertiary-fixed-variant": "#005312",
+                    "on-error": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed-dim": "#a9c7ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "margin-desktop": "64px",
+                    "xl": "32px",
+                    "gutter": "16px",
+                    "margin-mobile": "16px",
+                    "sm": "8px",
+                    "lg": "24px",
+                    "base": "8px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Roboto Flex"],
+                    "label-md": ["Roboto Flex"],
+                    "title-lg": ["Roboto Flex"],
+                    "body-lg": ["Roboto Flex"],
+                    "label-lg": ["Roboto Flex"],
+                    "body-md": ["Roboto Flex"],
+                    "display-lg": ["Roboto Flex"],
+                    "headline-lg": ["Roboto Flex"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Roboto Flex', sans-serif;
+            background-color: #f9f9ff;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+
+        .success-checkmark-animation {
+            animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+        }
+
+        @keyframes scaleIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .bento-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 77, 153, 0.1);
+        }
+
+        .floating-circles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            top: 0;
+            left: 0;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 93, 183, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
+            filter: blur(40px);
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, -50px); }
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- Atmospheric Background Particles -->
+<div class="floating-circles">
+<div class="circle w-96 h-96 top-[-10%] left-[-5%]"></div>
+<div class="circle w-80 h-80 bottom-[-10%] right-[-5%] animation-delay-2000" style="animation-delay: -5s;"></div>
+<div class="circle w-64 h-64 top-1/2 left-1/4 animation-delay-4000" style="animation-delay: -12s;"></div>
+</div>
+<!-- Main Content Canvas -->
+<main class="min-h-screen flex items-center justify-center p-margin-mobile md:p-margin-desktop">
+<div class="relative w-full max-w-4xl grid grid-cols-1 md:grid-cols-12 gap-gutter items-stretch">
+<!-- Left Side: Visual/Branding (Asymmetric Bento Style) -->
+<div class="hidden md:flex md:col-span-5 flex-col justify-between p-lg rounded-xl bg-primary-container text-on-primary-container overflow-hidden relative">
+<div class="z-10">
+<div class="flex items-center gap-xs mb-xl">
+<span class="material-symbols-outlined text-[40px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<h1 class="font-headline-lg text-headline-lg font-bold tracking-tight">Reencuentro</h1>
+</div>
+<h2 class="font-headline-lg text-headline-lg leading-tight mb-md">Reuniendo familias, devolviendo la esperanza.</h2>
+<p class="font-body-lg text-body-lg opacity-90">Nuestra plataforma utiliza tecnología avanzada para asegurar que cada niño encuentre el camino de vuelta a casa.</p>
+</div>
+<!-- Decorative Image Component -->
+<div class="mt-xl relative h-64 w-full rounded-xl overflow-hidden shadow-lg border border-white/10">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A heart-warming, soft-focus photographic scene of a diverse group of humanitarian aid workers smiling and talking in a modern, sun-drenched community center. The lighting is warm and golden, evoking a sense of safety and professional care. The style is clean and high-end, using a professional color palette of blues and soft whites to match a humanitarian mission's branding." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAlIJoS0qqDNg1dDsO7fmGECEdbgKqcW2Flau7qhRdT5z1SGDfbQYishY-kAq244rPBNlI9F7xleVC_mqkTVva1uYsXEE-gMla6HwZfpi8V59s1INIa9w7OHh-sdRujke8nk8RWvms6SOe9flXQj0yVsinK_qbDQAV-qwFz3tG3v62fIvYZYK1X7q5-9tpO99ervjpYiovmagovb0cjRa2-vJS0QgaFcMf7SPE78H25aujSp-cVwHkaLh4uiYbcg9SWmApICTB4kw')">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container/80 to-transparent"></div>
+</div>
+</div>
+<!-- Right Side: Success Content Card -->
+<div class="md:col-span-7 bento-card rounded-xl p-lg md:p-xl shadow-xl flex flex-col items-center justify-center text-center space-y-lg">
+<!-- Animated Success Icon -->
+<div class="success-checkmark-animation w-24 h-24 md:w-32 md:h-32 bg-tertiary-fixed rounded-full flex items-center justify-center text-tertiary shadow-sm">
+<span class="material-symbols-outlined text-[64px] md:text-[80px]" style="font-variation-settings: 'FILL' 0, 'wght' 600;">check_circle</span>
+</div>
+<!-- Messaging Section -->
+<div class="space-y-md">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg font-extrabold text-primary">¡Cuenta activada!</h2>
+<div class="max-w-md mx-auto space-y-md">
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                        Tu cuenta ha sido activada exitosamente en el sistema Reencuentro. Ahora formas parte de nuestra red de protección infantil.
+                    </p>
+<!-- Admin Notice Box -->
+<div class="bg-surface-container-low border-l-4 border-primary p-md rounded-r-lg text-left">
+<div class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<div>
+<p class="font-label-lg text-label-lg text-primary font-bold">Verificación de Centro</p>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                                    Por motivos de seguridad, tu centro debe ser validado por un administrador global antes de poder publicar reportes. Recibirás un correo cuando este proceso finalice.
+                                </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Primary Action -->
+<div class="w-full max-w-sm pt-md">
+<button class="w-full bg-primary text-on-primary py-md px-xl rounded-full font-label-lg text-label-lg shadow-md hover:bg-on-primary-fixed-variant transition-all duration-300 active:scale-95 flex items-center justify-center gap-sm">
+<span>INICIAR SESIÓN</span>
+<span class="material-symbols-outlined">login</span>
+</button>
+</div>
+<!-- Support Footer -->
+<p class="font-label-md text-label-md text-outline">
+                ¿Tienes dudas? <a class="text-primary font-bold hover:underline" href="#">Contacta a soporte técnico</a>
+</p>
+</div>
+</div>
+</main>
+<!-- Micro-interaction Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Subtle mouse tracking for the background circles
+        const circles = document.querySelectorAll('.circle');
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            circles.forEach((circle, index) => {
+                const factor = (index + 1) * 10;
+                circle.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
+            });
+        });
+
+        // Smooth entrance for card elements
+        const bentoCard = document.querySelector('.bento-card');
+        if (bentoCard) {
+            bentoCard.style.opacity = '0';
+            bentoCard.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                bentoCard.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+                bentoCard.style.opacity = '1';
+                bentoCard.style.transform = 'translateY(0)';
+            }, 100);
+        }
+    });
+</script>
+</body></html>

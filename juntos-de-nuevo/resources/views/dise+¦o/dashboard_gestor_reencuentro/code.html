@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es-VE"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reencuentro - Dashboard Gestor</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Roboto Flex for Material 3 look -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-container": "#dae5ff",
+                    "on-tertiary-fixed": "#002204",
+                    "tertiary-container": "#25752b",
+                    "error": "#ba1a1a",
+                    "surface": "#f9f9ff",
+                    "surface-dim": "#d8dae2",
+                    "primary-container": "#1565c0",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#005db7",
+                    "tertiary-fixed": "#a3f69c",
+                    "inverse-primary": "#a9c7ff",
+                    "on-primary-fixed": "#001b3d",
+                    "primary-fixed": "#d6e3ff",
+                    "inverse-on-surface": "#eff0f9",
+                    "secondary-fixed-dim": "#afcbd8",
+                    "on-secondary-fixed": "#021f29",
+                    "secondary-fixed": "#cbe7f5",
+                    "surface-container-low": "#f2f3fb",
+                    "surface-container-high": "#e7e8f0",
+                    "surface-container-highest": "#e1e2ea",
+                    "error-container": "#ffdad6",
+                    "secondary-container": "#cbe7f5",
+                    "on-secondary-fixed-variant": "#304a55",
+                    "outline": "#727783",
+                    "outline-variant": "#c2c6d4",
+                    "surface-variant": "#e1e2ea",
+                    "on-primary-fixed-variant": "#00468c",
+                    "on-secondary-container": "#4e6874",
+                    "on-surface-variant": "#424752",
+                    "on-background": "#191c21",
+                    "inverse-surface": "#2e3037",
+                    "surface-container-lowest": "#ffffff",
+                    "primary": "#004d99",
+                    "tertiary": "#005c15",
+                    "tertiary-fixed-dim": "#88d982",
+                    "background": "#f9f9ff",
+                    "on-tertiary-container": "#a5f99e",
+                    "on-error-container": "#93000a",
+                    "surface-bright": "#f9f9ff",
+                    "secondary": "#48626e",
+                    "on-surface": "#191c21",
+                    "surface-container": "#ecedf6",
+                    "on-tertiary-fixed-variant": "#005312",
+                    "on-error": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed-dim": "#a9c7ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "margin-desktop": "64px",
+                    "xl": "32px",
+                    "gutter": "16px",
+                    "margin-mobile": "16px",
+                    "sm": "8px",
+                    "lg": "24px",
+                    "base": "8px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Roboto Flex"],
+                    "label-md": ["Roboto Flex"],
+                    "title-lg": ["Roboto Flex"],
+                    "body-lg": ["Roboto Flex"],
+                    "label-lg": ["Roboto Flex"],
+                    "body-md": ["Roboto Flex"],
+                    "display-lg": ["Roboto Flex"],
+                    "headline-lg": ["Roboto Flex"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Roboto Flex', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-glass {
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.7);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-row">
+<!-- SideNavBar (Desktop Shell) -->
+<aside class="hidden md:flex flex-col py-lg bg-surface-container-low h-screen w-80 rounded-r-xl shadow-md transition-all duration-200 ease-in-out">
+<div class="px-lg mb-xl">
+<h1 class="font-headline-lg text-headline-lg font-black text-primary">Reencuentro</h1>
+<p class="font-label-lg text-label-lg text-on-surface-variant mt-xs">Gestión de Reunificación</p>
+</div>
+<nav class="flex-1 space-y-2">
+<!-- Active: Inicio (Matches Home intent) -->
+<a class="flex items-center gap-md py-md px-lg bg-secondary-container text-on-secondary-container rounded-full mx-2 font-bold transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-lg text-label-lg">Inicio</span>
+</a>
+<a class="flex items-center gap-md py-md px-lg text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out mx-2" href="#">
+<span class="material-symbols-outlined" data-icon="child_care">child_care</span>
+<span class="font-label-lg text-label-lg">Niños</span>
+</a>
+<a class="flex items-center gap-md py-md px-lg text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out mx-2" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-lg text-label-lg">Configuración</span>
+</a>
+</nav>
+<div class="px-lg mt-auto pt-lg border-t border-outline-variant/30 flex items-center gap-md">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-primary-container flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="A close-up professional portrait of Maria, a humanitarian worker in a crisp white shirt with a focused and compassionate expression. The background is a soft-focus office with blueprints and a calming blue and white color palette. The lighting is bright and airy, emphasizing a modern light-mode design aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAItwdVoXp8p6Anv3_I13a9s0toJ5RbrgHNAAWv7FYhJrwev0gZonqkJzKEE7wtxqI0XksFlpC7J0uGSU89Ta8S4ZKU4d_rur8jrAkufd-dq3ck5Wc_T2L8KrCLLVKgyIhhfTEQyEop8cDtCdEyAJiVJQZta-KXMiqKgCIKArHK5MJ4Qmf7fvJyjSaw0bSRu_GaPjUSU1N6eZ-A1L3be_SYsq4Y9e5H1n2_d585YPZhvVFL0o3toj8xp7brLc3AFyTxQZrYD_cL8g"/>
+</div>
+<div>
+<p class="font-label-lg text-label-lg font-bold text-on-surface">María Pérez</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Admin Central</p>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto">
+<!-- TopAppBar -->
+<header class="sticky top-0 z-30 flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop h-16 bg-surface shadow-sm">
+<div class="flex items-center gap-md">
+<span class="md:hidden material-symbols-outlined text-primary cursor-pointer" data-icon="menu">menu</span>
+<h2 class="font-title-lg text-title-lg text-primary truncate">Bienvenido, María - Protección Civil Central</h2>
+</div>
+<div class="flex items-center gap-sm">
+<button class="p-2 rounded-full hover:bg-surface-container-low transition-colors material-symbols-outlined text-on-surface-variant" data-icon="search">search</button>
+<button class="p-2 rounded-full hover:bg-surface-container-low transition-colors material-symbols-outlined text-on-surface-variant" data-icon="notifications">notifications</button>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="px-margin-mobile md:px-margin-desktop py-xl space-y-xl max-w-7xl mx-auto w-full pb-32 md:pb-xl">
+<!-- Statistics Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<!-- Card 1: Niños Activos -->
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-sm border border-outline-variant/20 flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<span class="p-2 bg-primary-container/10 text-primary rounded-lg material-symbols-outlined" data-icon="person_search">person_search</span>
+<span class="text-tertiary font-label-md text-label-md">+5% hoy</span>
+</div>
+<span class="font-display-lg text-[40px] leading-tight font-bold text-on-surface">12</span>
+<span class="font-label-lg text-label-lg text-on-surface-variant">Niños activos</span>
+</div>
+<!-- Card 2: Recogidos -->
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-sm border border-outline-variant/20 flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<span class="p-2 bg-tertiary-fixed/30 text-tertiary rounded-lg material-symbols-outlined" data-icon="check_circle">check_circle</span>
+<span class="text-on-surface-variant font-label-md text-label-md">En proceso</span>
+</div>
+<span class="font-display-lg text-[40px] leading-tight font-bold text-on-surface">3</span>
+<span class="font-label-lg text-label-lg text-on-surface-variant">Recogidos</span>
+</div>
+<!-- Card 3: Familia Localizada -->
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-sm border border-outline-variant/20 flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<span class="p-2 bg-secondary-container/50 text-secondary rounded-lg material-symbols-outlined" data-icon="family_restroom">family_restroom</span>
+<span class="text-primary font-label-md text-label-md">Reunificados</span>
+</div>
+<span class="font-display-lg text-[40px] leading-tight font-bold text-on-surface">2</span>
+<span class="font-label-lg text-label-lg text-on-surface-variant">Familia localizada</span>
+</div>
+<!-- Card 4: Total Registros -->
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-sm border border-outline-variant/20 flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<span class="p-2 bg-surface-variant text-on-surface-variant rounded-lg material-symbols-outlined" data-icon="list_alt">list_alt</span>
+<span class="text-on-surface-variant font-label-md text-label-md">Mes actual</span>
+</div>
+<span class="font-display-lg text-[40px] leading-tight font-bold text-on-surface">17</span>
+<span class="font-label-lg text-label-lg text-on-surface-variant">Total registros</span>
+</div>
+</section>
+<!-- Main Dashboard Split: Recent List & Activity -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-xl">
+<!-- Recent Cases List -->
+<section class="lg:col-span-2 space-y-md">
+<div class="flex items-center justify-between">
+<h3 class="font-title-lg text-title-lg text-on-surface">Mis niños recientes</h3>
+<button class="text-primary font-label-lg text-label-lg hover:underline transition-all">Ver todos</button>
+</div>
+<div class="space-y-sm">
+<!-- Case Item 1 -->
+<div class="group flex items-center gap-md p-md bg-surface-container-lowest hover:bg-surface-container-low rounded-xl border border-outline-variant/10 transition-all cursor-pointer">
+<div class="w-14 h-14 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A portrait of a young child with soft features, looking towards the camera with a calm expression. The child is wearing a clean, colorful shirt. The background is a gently blurred outdoor park with soft natural sunlight. The image is rendered in a professional, warm, and humanist photography style with a high-key light-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnToDd809lZPqXAPc0ZACxvxyobDxgZFYCxjtiV0JOv0JxNk5ANVty38aXdhvH8uoOzzIEQl-3b6mwOaueBSUJLXbbQYenL0ajoMZlmdxCsClc02CI-XN6yCAgauN93DhnNazEmxxwWSGOXZCOD46fFjnTjqDsL7Zfu_-7b86wRaytyTNwHYTSId3FcLfO_sYxDF3aw4b7sbVq6EmmVR39QaxI8hdNh5ofiHKddwfLwb3DT-H2r6Or2k4WM24uVgwGxi6g-0ZeDw"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-body-lg text-body-lg font-bold text-on-surface truncate">Luis Alejandro M.</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Visto en: Plaza Altamira • Hace 2h</p>
+</div>
+<div class="hidden sm:flex flex-col items-end gap-xs">
+<span class="px-3 py-1 bg-primary-container text-on-primary-container text-[10px] uppercase font-bold rounded-full">Buscando</span>
+<span class="font-label-md text-label-md text-outline">Ref: RE-0023</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Case Item 2 -->
+<div class="group flex items-center gap-md p-md bg-surface-container-lowest hover:bg-surface-container-low rounded-xl border border-outline-variant/10 transition-all cursor-pointer">
+<div class="w-14 h-14 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A soft and clear portrait of a small girl with braids, wearing a yellow dress. She has a hopeful smile. The background is a brightly lit indoor space with humanitarian aid symbols visible but blurred. The lighting is warm and reassuring, using a palette of soft yellows and calm blues for a professional light-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKvLLFdZwMZhMrBpfPb-awEJdT5oqZyC-sKh9LoUku7MFPQN6cT9AiSEdrneca1iDSl7v0ZdGqJmyaw45WlYAG0C5qmx3urMnjztBTg2oeAGDaqHLZTs16w9Fa4731GdDtzP9OC54U5Qig8wI7Wgcqw5fZ6Z-GI_aywTa32i8r_s9dLpCneDXvV0Na9DcVuvsOTxuzGmrXrFV25cDl8RhWc3CnatqfwV8NhKywSfhroq9jOXPMhET0neS5IWU--ZTHPC68mMZZhw"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-body-lg text-body-lg font-bold text-on-surface truncate">Ana Gabriela V.</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Visto en: Estación Chacao • Ayer</p>
+</div>
+<div class="hidden sm:flex flex-col items-end gap-xs">
+<span class="px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed text-[10px] uppercase font-bold rounded-full">Localizada</span>
+<span class="font-label-md text-label-md text-outline">Ref: RE-0021</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Case Item 3 -->
+<div class="group flex items-center gap-md p-md bg-surface-container-lowest hover:bg-surface-container-low rounded-xl border border-outline-variant/10 transition-all cursor-pointer">
+<div class="w-14 h-14 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A studio-style portrait of a young boy with curly hair, wearing a blue hoodie. He looks away from the camera with a thoughtful expression. The lighting is crisp and clear, creating a sophisticated professional look. The background is a minimalist light gray, fitting perfectly within a modern light-mode design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnvG5eIm4kEHNpz-IUoG9L87tXaKgimCJ4dugny2aMEuo4r-R4w_ZVq2OBsVdm5nXwp96vXwcLSy5cswLlVJT1KhRXJnk4kskC81spMfTqS-raovQWFwoTaztzP5HNMMsmOTAwyWET_d5o66iRjfnEHgdzpT6fQ1paO0fIu0sb4uQlgoULdCrQa_JGaDp82TyKD94reotiGSnwIxoqB6bjbSuOKirfb05PPUoKUKcnSGr3uly832Ak4Rk_6he8UxPvAOvNwePCkw"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-body-lg text-body-lg font-bold text-on-surface truncate">Santiago José R.</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Visto en: Terminal Oriente • 3 días</p>
+</div>
+<div class="hidden sm:flex flex-col items-end gap-xs">
+<span class="px-3 py-1 bg-secondary-fixed text-on-secondary-fixed text-[10px] uppercase font-bold rounded-full">Recogido</span>
+<span class="font-label-md text-label-md text-outline">Ref: RE-0019</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</section>
+<!-- Activity Sidebar -->
+<section class="space-y-md">
+<h3 class="font-title-lg text-title-lg text-on-surface">Mapa de proximidad</h3>
+<div class="relative w-full aspect-square rounded-2xl overflow-hidden shadow-sm border border-outline-variant/30">
+<div class="absolute inset-0 bg-surface-container-high flex items-center justify-center">
+<div class="w-full h-full" data-alt="A clean, minimalist vector map of Caracas, Venezuela, highlighting the central area with soft pastel tones of green and blue. The map features clear street lines and subtle icons for emergency centers. The aesthetic is professional, architectural, and serene, avoiding visual clutter to maintain a calm light-mode interface." data-location="Caracas, Venezuela" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDubt_GlwyJpJN3dc0mnb4dAMUlGX1WTf10eGfCftSDQJGUDvDxHFn5YxMXybdpUhU2ZdXemYyXbCTcH-C3t4KiVwAtRECukMctnr3bEM8irqY2eS4hiPJi8S1Hg7Wrf7mi4g5zdgmDT7cP7byHHSZTy_Lz6LtFQWN4xEASZ_jww-LDB8rHLW0tZ3oIIq-iWXkwayIwTP1qxZxRMUk_olfm3u9ia93wA9PsFJhlZcow1m-7RtBbm6SNvRpRS0lhf6sG9K41NfisvQ')"></div>
+</div>
+<div class="absolute top-4 left-4 bg-glass px-3 py-1 rounded-full border border-white/50 text-[10px] font-bold text-primary shadow-sm uppercase tracking-wider">Zona Central</div>
+</div>
+<div class="p-md bg-surface-container-lowest rounded-xl border border-outline-variant/20">
+<p class="font-label-lg text-label-lg font-bold mb-xs">Alertas de la zona</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Se reporta alta afluencia en terminales. Mantener equipos en alerta.</p>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- FAB: Registrar Niño (Extended) -->
+<button class="fixed bottom-24 md:bottom-12 right-6 md:right-12 z-50 flex items-center gap-md px-6 py-4 bg-primary text-on-primary rounded-2xl shadow-xl hover:shadow-2xl active:scale-95 transition-all group">
+<span class="material-symbols-outlined" data-icon="add" style="font-variation-settings: 'FILL' 0, 'wght' 600;">add</span>
+<span class="font-label-lg text-label-lg font-bold pr-1">Registrar Niño</span>
+</button>
+<!-- BottomNavBar (Mobile Shell) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 bg-surface shadow-[0_-2px_10px_rgba(0,0,0,0.05)] rounded-t-xl flex justify-around items-center h-20 pb-safe">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-6 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-md text-label-md">Inicio</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="child_care">child_care</span>
+<span class="font-label-md text-label-md">Niños</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Ajustes</span>
+</a>
+</nav>
+<script>
+        // Micro-interactions for hovering cards
+        document.querySelectorAll('.group').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                // Potential for subtle JS animations if needed
+            });
+        });
+
+        // Search Bar Toggle Mockup
+        const searchBtn = document.querySelector('[data-icon="search"]');
+        searchBtn.addEventListener('click', () => {
+            console.log("Busqueda activada");
+        });
+    </script>
+</body></html>

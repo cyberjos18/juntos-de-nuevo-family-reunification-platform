@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es-VE"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reencuentro - Panel de Administración</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-container": "#dae5ff",
+                    "on-tertiary-fixed": "#002204",
+                    "tertiary-container": "#25752b",
+                    "error": "#ba1a1a",
+                    "surface": "#f9f9ff",
+                    "surface-dim": "#d8dae2",
+                    "primary-container": "#1565c0",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#005db7",
+                    "tertiary-fixed": "#a3f69c",
+                    "inverse-primary": "#a9c7ff",
+                    "on-primary-fixed": "#001b3d",
+                    "primary-fixed": "#d6e3ff",
+                    "inverse-on-surface": "#eff0f9",
+                    "secondary-fixed-dim": "#afcbd8",
+                    "on-secondary-fixed": "#021f29",
+                    "secondary-fixed": "#cbe7f5",
+                    "surface-container-low": "#f2f3fb",
+                    "surface-container-high": "#e7e8f0",
+                    "surface-container-highest": "#e1e2ea",
+                    "error-container": "#ffdad6",
+                    "secondary-container": "#cbe7f5",
+                    "on-secondary-fixed-variant": "#304a55",
+                    "outline": "#727783",
+                    "outline-variant": "#c2c6d4",
+                    "surface-variant": "#e1e2ea",
+                    "on-primary-fixed-variant": "#00468c",
+                    "on-secondary-container": "#4e6874",
+                    "on-surface-variant": "#424752",
+                    "on-background": "#191c21",
+                    "inverse-surface": "#2e3037",
+                    "surface-container-lowest": "#ffffff",
+                    "primary": "#004d99",
+                    "tertiary": "#005c15",
+                    "tertiary-fixed-dim": "#88d982",
+                    "background": "#f9f9ff",
+                    "on-tertiary-container": "#a5f99e",
+                    "on-error-container": "#93000a",
+                    "surface-bright": "#f9f9ff",
+                    "secondary": "#48626e",
+                    "on-surface": "#191c21",
+                    "surface-container": "#ecedf6",
+                    "on-tertiary-fixed-variant": "#005312",
+                    "on-error": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed-dim": "#a9c7ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "margin-desktop": "64px",
+                    "xl": "32px",
+                    "gutter": "16px",
+                    "margin-mobile": "16px",
+                    "sm": "8px",
+                    "lg": "24px",
+                    "base": "8px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Roboto Flex"],
+                    "label-md": ["Roboto Flex"],
+                    "title-lg": ["Roboto Flex"],
+                    "body-lg": ["Roboto Flex"],
+                    "label-lg": ["Roboto Flex"],
+                    "body-md": ["Roboto Flex"],
+                    "display-lg": ["Roboto Flex"],
+                    "headline-lg": ["Roboto Flex"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Roboto Flex', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #c2c6d4; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #727783; }
+    </style>
+</head>
+<body class="bg-background text-on-background flex h-screen overflow-hidden">
+<!-- SIDEBAR (SideNavBar Shared Component Implementation) -->
+<aside class="hidden md:flex flex-col py-lg bg-surface-container-low h-screen w-80 rounded-r-xl shadow-md transition-all duration-200 ease-in-out border-r border-outline-variant/10">
+<!-- Brand Identity -->
+<div class="px-lg mb-xl">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<h1 class="font-headline-lg text-headline-lg font-black text-primary">Reencuentro</h1>
+</div>
+<div class="flex items-center gap-3 p-3 bg-surface-container-high rounded-xl">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-primary-container flex items-center justify-center text-on-primary-container font-bold">
+                    RE
+                </div>
+<div>
+<p class="font-label-lg text-label-lg text-primary font-bold">Reencuentro Admin</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Gesti\u00f3n de Reunificaci\u00f3n</p>
+</div>
+</div>
+</div>
+<!-- Navigation items -->
+<nav class="flex-1 space-y-1">
+<!-- Active: Inicio (Dashboard) -->
+<a class="flex items-center gap-4 py-3 bg-secondary-container text-on-secondary-container rounded-full mx-2 px-4 font-bold transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-lg text-label-lg">Inicio</span>
+</a>
+<!-- Inactive: Niños -->
+<a class="flex items-center gap-4 py-3 text-on-surface-variant mx-2 px-4 hover:bg-surface-container-high rounded-full transition-all duration-200" href="#">
+<span class="material-symbols-outlined">child_care</span>
+<span class="font-label-lg text-label-lg">Ni\u00f1os</span>
+</a>
+<!-- Inactive: Configuración -->
+<a class="flex items-center gap-4 py-3 text-on-surface-variant mx-2 px-4 hover:bg-surface-container-high rounded-full transition-all duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-lg text-label-lg">Configuraci\u00f3n</span>
+</a>
+</nav>
+<!-- CTA -->
+<div class="px-4 mt-auto">
+<button class="w-full py-4 bg-primary text-on-primary rounded-xl font-label-lg text-label-lg flex items-center justify-center gap-2 hover:shadow-lg transition-all active:scale-95 shadow-md">
+<span class="material-symbols-outlined">add_circle</span>
+                Registrar Ni\u00f1o
+            </button>
+</div>
+</aside>
+<!-- MAIN CONTENT -->
+<main class="flex-1 flex flex-col h-screen overflow-y-auto relative">
+<!-- TOP BAR (TopAppBar Shared Component Implementation) -->
+<header class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop h-16 bg-surface shadow-sm sticky top-0 z-40">
+<div class="flex items-center gap-4">
+<span class="md:hidden material-symbols-outlined text-on-surface-variant">menu</span>
+<h2 class="font-title-lg text-title-lg text-primary font-medium">Panel de Administración de Reencuentro</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex items-center bg-surface-container-low px-4 py-2 rounded-full border border-outline-variant">
+<span class="material-symbols-outlined text-on-surface-variant text-base mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md w-64" placeholder="Buscar reportes..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- DASHBOARD CANVAS -->
+<section class="p-margin-mobile md:p-margin-desktop space-y-xl">
+<!-- Bento Grid Stats Section -->
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-gutter">
+<!-- Total Children -->
+<div class="md:col-span-2 lg:col-span-2 bg-primary-container text-on-primary-container p-6 rounded-3xl shadow-sm relative overflow-hidden group">
+<div class="relative z-10">
+<p class="font-label-lg text-label-lg uppercase tracking-wider opacity-80">Total Ni\u00f1os</p>
+<h3 class="font-display-lg text-display-lg font-bold mt-2">45</h3>
+<p class="font-body-md text-body-md mt-4 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+                            +12% desde el mes pasado
+                        </p>
+</div>
+<span class="material-symbols-outlined absolute -bottom-4 -right-4 text-9xl opacity-10 group-hover:scale-110 transition-transform">child_care</span>
+</div>
+<!-- Active -->
+<div class="bg-surface-container-highest p-6 rounded-3xl shadow-sm border border-outline-variant/30 flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-tertiary">record_voice_over</span>
+<p class="font-label-md text-label-md text-on-surface-variant mt-2">Activos</p>
+</div>
+<h3 class="font-headline-lg text-headline-lg font-bold text-on-surface">8</h3>
+</div>
+<!-- Pending -->
+<div class="bg-surface-container-highest p-6 rounded-3xl shadow-sm border border-outline-variant/30 flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-error">pending_actions</span>
+<p class="font-label-md text-label-md text-on-surface-variant mt-2">Pendientes</p>
+</div>
+<h3 class="font-headline-lg text-headline-lg font-bold text-on-surface">4</h3>
+</div>
+<!-- Centers -->
+<div class="bg-surface-container-highest p-6 rounded-3xl shadow-sm border border-outline-variant/30 flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-primary">domain</span>
+<p class="font-label-md text-label-md text-on-surface-variant mt-2">Centros</p>
+</div>
+<h3 class="font-headline-lg text-headline-lg font-bold text-on-surface">12</h3>
+</div>
+<!-- Users -->
+<div class="bg-surface-container-highest p-6 rounded-3xl shadow-sm border border-outline-variant/30 flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-secondary">group</span>
+<p class="font-label-md text-label-md text-on-surface-variant mt-2">Usuarios</p>
+</div>
+<h3 class="font-headline-lg text-headline-lg font-bold text-on-surface">22</h3>
+</div>
+</div>
+<!-- Main Layout: Reunited + Quick Actions -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-xl">
+<!-- Reunited List (High-end UI Card) -->
+<div class="lg:col-span-2 bg-surface-container-low rounded-3xl p-6 border border-outline-variant/20">
+<div class="flex justify-between items-center mb-6">
+<h4 class="font-title-lg text-title-lg text-on-surface font-bold">Recogidos Recientemente</h4>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full font-label-md text-label-md font-bold">15 Totales</span>
+</div>
+<div class="space-y-4">
+<!-- List Item 1 -->
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-2xl hover:shadow-md transition-shadow cursor-pointer border border-transparent hover:border-outline-variant">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-xl overflow-hidden shadow-inner">
+<img class="w-full h-full object-cover" data-alt="A portrait of a smiling young boy from Venezuela, warm natural afternoon lighting, realistic photography style, soft focus background of a community center garden, hopeful and safe atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLw8Gw4Jka93RgmeU5xc26SoohRffEHsAUcYuRBJh1vBb34gP3MqIFcgIrO6utU1KSHyyNOu4Ztr6vuvlcMQfmhc9v09j9HUDgCDKTPDlD6WapaBy7wfUvxSn5MKU7qjTsnI3T4bvUrRQxbYm35XU4MJ94SbF_qhM_CJ-NmV3WYeJJXvzhkUqsgfy-YjBaeVLc9acGXhyGTMVminsjDJUSbgFLBG9cea5jIk32B2Z73txApu5ZR4zreEBLZLOp48Cv5bbsZvDJAg"/>
+</div>
+<div>
+<p class="font-label-lg text-label-lg font-bold text-on-surface">Santiago Méndez</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Entregado a: María Méndez (Madre)</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label-md text-label-md text-on-surface-variant">Hace 2 horas</p>
+<span class="text-tertiary text-xs font-bold uppercase tracking-widest">Completado</span>
+</div>
+</div>
+<!-- List Item 2 -->
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-2xl hover:shadow-md transition-shadow cursor-pointer border border-transparent hover:border-outline-variant">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-xl overflow-hidden shadow-inner">
+<img class="w-full h-full object-cover" data-alt="A portrait of a young Venezuelan girl with braided hair, soft studio lighting, professional and empathetic aesthetic, clear background, high quality portraiture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpW_0XJ6UyQ1UxTzQQmu4kZZZmnfG_UHkwUiaY37a_48IdSaPGTm9xUILtR-0r6mvzmYxEBp4hDnVqhL8rC9ZNDetyoWVSmjA5fnrX-SajMIA27gpTSSQYd_3lAZvZKxlmI1deRM6hXeswhkdUytt5eNzZ9vEYNIQOcMRI-fWJwPCQY7FsXZT1IfOlT3NW6vjickHC8tEsm3YBj5fqDa5Xf6hPQ-sjZsE9O9AtAP_MRrxUypGB5Y7PvPJSWMFi01BBblSB7LAqkw"/>
+</div>
+<div>
+<p class="font-label-lg text-label-lg font-bold text-on-surface">Valentina Rojas</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Entregado a: José Rojas (Padre)</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label-md text-label-md text-on-surface-variant">Ayer, 4:30 PM</p>
+<span class="text-tertiary text-xs font-bold uppercase tracking-widest">Completado</span>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 py-3 text-primary font-label-lg text-label-lg hover:bg-primary-container/10 rounded-xl transition-colors">
+                        Ver todas las recogidas en Reencuentro
+                    </button>
+</div>
+<!-- Quick Actions Panel -->
+<div class="space-y-gutter">
+<h4 class="font-title-lg text-title-lg text-on-surface font-bold px-2">Acciones Rápidas</h4>
+<div class="flex flex-col gap-gutter">
+<!-- Action 1 -->
+<button class="flex items-center gap-4 p-5 bg-surface-container-high rounded-3xl text-left hover:bg-primary-container hover:text-on-primary-container transition-all group border border-outline-variant/10">
+<div class="w-12 h-12 rounded-2xl bg-primary text-on-primary flex items-center justify-center group-hover:bg-on-primary-container group-hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined">verified_user</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg font-bold">Validar centros</p>
+<p class="font-body-md text-body-md opacity-70">3 solicitudes nuevas</p>
+</div>
+</button>
+<!-- Action 2 -->
+<button class="flex items-center gap-4 p-5 bg-surface-container-high rounded-3xl text-left hover:bg-primary-container hover:text-on-primary-container transition-all group border border-outline-variant/10">
+<div class="w-12 h-12 rounded-2xl bg-secondary text-on-secondary flex items-center justify-center group-hover:bg-on-primary-container group-hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined">visibility</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg font-bold">Ver recogidas</p>
+<p class="font-body-md text-body-md opacity-70">Historial completo</p>
+</div>
+</button>
+<!-- Action 3 -->
+<button class="flex items-center gap-4 p-5 bg-surface-container-high rounded-3xl text-left hover:bg-primary-container hover:text-on-primary-container transition-all group border border-outline-variant/10">
+<div class="w-12 h-12 rounded-2xl bg-tertiary text-on-tertiary flex items-center justify-center group-hover:bg-on-primary-container group-hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined">mail</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg font-bold">Configurar Notificaciones</p>
+<p class="font-body-md text-body-md opacity-70">Ajustes de Mailjet</p>
+</div>
+</button>
+</div>
+<!-- System Health Widget -->
+<div class="p-6 bg-surface-container-lowest rounded-3xl border border-outline-variant/30 mt-8">
+<p class="font-label-md text-label-md text-on-surface-variant mb-4 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+                            Estado de Reencuentro: Óptimo
+                        </p>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-tertiary w-full h-full"></div>
+</div>
+<p class="text-[10px] text-on-surface-variant mt-2 uppercase tracking-tighter">Última sincronización: Hace 2 min</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Spacer for mobile nav -->
+<div class="h-24 md:hidden"></div>
+</main>
+<!-- BOTTOM NAVIGATION (BottomNavBar Shared Component Implementation) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 bg-surface rounded-t-xl shadow-[0_-2px_10px_rgba(0,0,0,0.05)] flex justify-around items-center h-20 pb-safe">
+<!-- Active: Inicio -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-6 py-1" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-md text-label-md">Inicio</span>
+</a>
+<!-- Inactive: Niños -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">child_care</span>
+<span class="font-label-md text-label-md">Ni\u00f1os</span>
+</a>
+<!-- Inactive: Ajustes -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Ajustes</span>
+</a>
+</nav>
+<!-- FAB for mobile -->
+<button class="md:hidden fixed bottom-24 right-6 w-14 h-14 bg-primary text-on-primary rounded-[16px] shadow-lg flex items-center justify-center z-50 active:scale-90 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</button>
+<script>
+        // Simple Interaction Logic
+        document.querySelectorAll('button, a').forEach(el => {
+            el.addEventListener('click', (e) => {
+                // Mock interaction
+                console.log('Interacción registrada:', el.innerText || 'Icon Button');
+            });
+        });
+
+        // Search bar focus effect
+        const searchInput = document.querySelector('input[type="text"]');
+        if(searchInput) {
+            searchInput.addEventListener('focus', () => {
+                searchInput.parentElement.classList.add('ring-2', 'ring-primary', 'border-transparent');
+            });
+            searchInput.addEventListener('blur', () => {
+                searchInput.parentElement.classList.remove('ring-2', 'ring-primary', 'border-transparent');
+            });
+        }
+    </script>
+</body></html>

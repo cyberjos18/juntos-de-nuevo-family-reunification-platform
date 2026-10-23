@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es-VE"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Registrar Niño - Reencuentro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Roboto Flex', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c2c6d4;
+            border-radius: 10px;
+        }
+    </style>
+<!-- Tailwind Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-container": "#dae5ff",
+                    "on-tertiary-fixed": "#002204",
+                    "tertiary-container": "#25752b",
+                    "error": "#ba1a1a",
+                    "surface": "#f9f9ff",
+                    "surface-dim": "#d8dae2",
+                    "primary-container": "#1565c0",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#005db7",
+                    "tertiary-fixed": "#a3f69c",
+                    "inverse-primary": "#a9c7ff",
+                    "on-primary-fixed": "#001b3d",
+                    "primary-fixed": "#d6e3ff",
+                    "inverse-on-surface": "#eff0f9",
+                    "secondary-fixed-dim": "#afcbd8",
+                    "on-secondary-fixed": "#021f29",
+                    "secondary-fixed": "#cbe7f5",
+                    "surface-container-low": "#f2f3fb",
+                    "surface-container-high": "#e7e8f0",
+                    "surface-container-highest": "#e1e2ea",
+                    "error-container": "#ffdad6",
+                    "secondary-container": "#cbe7f5",
+                    "on-secondary-fixed-variant": "#304a55",
+                    "outline": "#727783",
+                    "outline-variant": "#c2c6d4",
+                    "surface-variant": "#e1e2ea",
+                    "on-primary-fixed-variant": "#00468c",
+                    "on-secondary-container": "#4e6874",
+                    "on-surface-variant": "#424752",
+                    "on-background": "#191c21",
+                    "inverse-surface": "#2e3037",
+                    "surface-container-lowest": "#ffffff",
+                    "primary": "#004d99",
+                    "tertiary": "#005c15",
+                    "tertiary-fixed-dim": "#88d982",
+                    "background": "#f9f9ff",
+                    "on-tertiary-container": "#a5f99e",
+                    "on-error-container": "#93000a",
+                    "surface-bright": "#f9f9ff",
+                    "secondary": "#48626e",
+                    "on-surface": "#191c21",
+                    "surface-container": "#ecedf6",
+                    "on-tertiary-fixed-variant": "#005312",
+                    "on-error": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed-dim": "#a9c7ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "margin-desktop": "64px",
+                    "xl": "32px",
+                    "gutter": "16px",
+                    "margin-mobile": "16px",
+                    "sm": "8px",
+                    "lg": "24px",
+                    "base": "8px",
+                    "xs": "4px"
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-background text-primary dark:text-primary-fixed shadow-sm sticky top-0 z-50 flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop h-16">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-size: 32px;">volunteer_activism</span>
+<span class="font-headline-lg text-headline-lg font-bold text-primary dark:text-primary-fixed">Reencuentro</span>
+</div>
+<div class="hidden md:flex items-center gap-xl font-title-lg text-title-lg">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low transition-colors px-4 py-2 rounded-lg" href="#">Inicio</a>
+<a class="text-primary dark:text-primary-fixed border-b-2 border-primary px-4 py-2" href="#">Niños</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low transition-colors px-4 py-2 rounded-lg" href="#">Configuración</a>
+</div>
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors cursor-pointer">search</button>
+<div class="h-10 w-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold">JD</div>
+</div>
+</header>
+<div class="flex min-h-[calc(100vh-64px)]">
+<!-- SideNavBar (Hidden on Mobile) -->
+<aside class="hidden md:flex flex-col py-lg h-auto w-80 rounded-r-xl bg-surface-container-low dark:bg-surface-container-lowest shadow-md border-r border-outline-variant/20">
+<div class="px-lg mb-xl">
+<h2 class="font-label-lg text-label-lg text-on-surface-variant uppercase tracking-wider">Gestión</h2>
+</div>
+<nav class="flex-grow space-y-2">
+<a class="flex items-center gap-4 px-6 py-3 text-on-surface-variant dark:text-on-surface-variant mx-2 hover:bg-surface-container-high transition-all duration-200 rounded-full font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">home</span>
+<span>Inicio</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-3 bg-secondary-container text-on-secondary-container rounded-full mx-2 font-bold font-label-lg text-label-lg shadow-sm" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">child_care</span>
+<span>Niños</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-3 text-on-surface-variant dark:text-on-surface-variant mx-2 hover:bg-surface-container-high transition-all duration-200 rounded-full font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Configuración</span>
+</a>
+</nav>
+<div class="mt-auto px-lg pt-lg border-t border-outline-variant/30">
+<div class="flex items-center gap-md p-md rounded-xl bg-surface-container-highest/50">
+<div class="h-12 w-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined">admin_panel_settings</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg font-bold">Admin Reencuentro</p>
+<p class="text-[11px] text-on-surface-variant">Unidad de Reunificación</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-grow bg-surface p-margin-mobile md:p-margin-desktop overflow-y-auto custom-scrollbar pb-32">
+<div class="max-w-4xl mx-auto">
+<!-- Header -->
+<header class="mb-xl">
+<h1 class="font-headline-lg text-headline-lg md:font-headline-lg md:text-headline-lg font-bold text-primary mb-2">Registrar Nuevo Niño</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Ingrese la información detallada para facilitar el proceso de búsqueda y reunificación familiar.</p>
+</header>
+<!-- Form Section -->
+<form class="space-y-xl">
+<!-- Top Section: Photo and Basic Info Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-lg items-start">
+<!-- Photo Upload (4:3 Aspect Ratio) -->
+<div class="md:col-span-5 w-full">
+<label class="block font-label-lg text-label-lg text-on-surface-variant mb-base">Fotografía del menor</label>
+<div class="group relative aspect-[4/3] rounded-xl border-2 border-dashed border-outline-variant bg-surface-container-low hover:bg-surface-container-high transition-all cursor-pointer flex flex-col items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-outline text-5xl mb-md group-hover:scale-110 transition-transform">photo_camera</span>
+<div class="text-center px-lg">
+<p class="font-label-lg text-label-lg text-primary">Cargar foto</p>
+<p class="font-label-md text-label-md text-on-surface-variant mt-1">Formato JPG o PNG (Recomendado 4:3)</p>
+</div>
+<input accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer" type="file"/>
+</div>
+</div>
+<!-- Basic Details Fields -->
+<div class="md:col-span-7 space-y-md">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-md">
+<div class="relative">
+<input class="peer w-full bg-transparent px-md py-4 rounded-xl border border-outline focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder-transparent" id="nombre" placeholder="Nombre" type="text"/>
+<label class="absolute left-md -top-2 px-1 bg-surface text-label-md text-on-surface-variant peer-placeholder-shown:text-body-md peer-placeholder-shown:top-4 peer-focus:-top-2 peer-focus:text-label-md peer-focus:text-primary transition-all" for="nombre">Nombre</label>
+</div>
+<div class="relative">
+<input class="peer w-full bg-transparent px-md py-4 rounded-xl border border-outline focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder-transparent" id="apellido" placeholder="Apellido" type="text"/>
+<label class="absolute left-md -top-2 px-1 bg-surface text-label-md text-on-surface-variant peer-placeholder-shown:text-body-md peer-placeholder-shown:top-4 peer-focus:-top-2 peer-focus:text-label-md peer-focus:text-primary transition-all" for="apellido">Apellido</label>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-md">
+<div class="relative">
+<input class="peer w-full bg-transparent px-md py-4 rounded-xl border border-outline focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder-transparent" id="edad" placeholder="Edad" type="number"/>
+<label class="absolute left-md -top-2 px-1 bg-surface text-label-md text-on-surface-variant peer-placeholder-shown:text-body-md peer-placeholder-shown:top-4 peer-focus:-top-2 peer-focus:text-label-md peer-focus:text-primary transition-all" for="edad">Edad (estimada)</label>
+</div>
+<div class="relative">
+<input class="peer w-full bg-transparent px-md py-4 rounded-xl border border-outline focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-on-surface" id="dob" placeholder="Fecha de nacimiento" type="date"/>
+<label class="absolute left-md -top-2 px-1 bg-surface text-label-md text-primary" for="dob">Fecha de nacimiento</label>
+</div>
+</div>
+<div class="p-md bg-surface-container-low rounded-xl border border-outline-variant">
+<span class="block font-label-md text-label-md text-on-surface-variant mb-base">Sexo</span>
+<div class="flex gap-xl">
+<label class="flex items-center gap-sm cursor-pointer group">
+<input class="w-5 h-5 text-primary focus:ring-primary bg-transparent border-outline" name="sexo" type="radio" value="masculino"/>
+<span class="font-body-md text-body-md group-hover:text-primary transition-colors">Masculino</span>
+</label>
+<label class="flex items-center gap-sm cursor-pointer group">
+<input class="w-5 h-5 text-primary focus:ring-primary bg-transparent border-outline" name="sexo" type="radio" value="femenino"/>
+<span class="font-body-md text-body-md group-hover:text-primary transition-colors">Femenino</span>
+</label>
+<label class="flex items-center gap-sm cursor-pointer group">
+<input class="w-5 h-5 text-primary focus:ring-primary bg-transparent border-outline" name="sexo" type="radio" value="otro"/>
+<span class="font-body-md text-body-md group-hover:text-primary transition-colors">No identificado</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- Location and Parents Information -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="relative">
+<textarea class="peer w-full bg-transparent px-md py-4 rounded-xl border border-outline focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder-transparent" id="ubicacion" placeholder="Ubicación anterior" rows="3"></textarea>
+<label class="absolute left-md -top-2 px-1 bg-surface text-label-md text-on-surface-variant peer-placeholder-shown:text-body-md peer-placeholder-shown:top-4 peer-focus:-top-2 peer-focus:text-label-md peer-focus:text-primary transition-all" for="ubicacion">Última ubicación conocida (Ciudad/Sector)</label>
+</div>
+<div class="relative">
+<textarea class="peer w-full bg-transparent px-md py-4 rounded-xl border border-outline focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder-transparent" id="padres" placeholder="Nombre de padres" rows="3"></textarea>
+<label class="absolute left-md -top-2 px-1 bg-surface text-label-md text-on-surface-variant peer-placeholder-shown:text-body-md peer-placeholder-shown:top-4 peer-focus:-top-2 peer-focus:text-label-md peer-focus:text-primary transition-all" for="padres">Nombres de los padres (si se conocen)</label>
+</div>
+</div>
+<!-- Collapsible Accordion: Familiares Conocidos -->
+<div class="rounded-xl border border-outline-variant overflow-hidden bg-surface-container-lowest">
+<button class="w-full flex items-center justify-between p-lg hover:bg-surface-container-low transition-colors" onclick="document.getElementById('familiares-content').classList.toggle('hidden'); document.getElementById('arrow-icon').classList.toggle('rotate-180')" type="button">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary">groups</span>
+<span class="font-title-lg text-title-lg text-on-surface">Familiares conocidos</span>
+</div>
+<span class="material-symbols-outlined transition-transform duration-300" id="arrow-icon">expand_more</span>
+</button>
+<div class="p-lg border-t border-outline-variant space-y-md" id="familiares-content">
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-md items-end">
+<div class="sm:col-span-1">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs ml-2">Nombre completo</label>
+<input class="w-full bg-transparent px-md py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="Ej: Maria Perez" type="text"/>
+</div>
+<div class="sm:col-span-1">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs ml-2">Parentesco</label>
+<input class="w-full bg-transparent px-md py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="Ej: Tía materna" type="text"/>
+</div>
+<div class="sm:col-span-1">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs ml-2">Teléfono / Contacto</label>
+<input class="w-full bg-transparent px-md py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="+58 412..." type="tel"/>
+</div>
+</div>
+<button class="flex items-center gap-2 text-primary font-label-lg text-label-lg py-2 px-4 hover:bg-primary/5 rounded-full transition-colors mt-md" type="button">
+<span class="material-symbols-outlined">add</span>
+<span>Agregar familiar</span>
+</button>
+</div>
+</div>
+<!-- Submit Button -->
+<div class="pt-xl border-t border-outline-variant/30 flex justify-end">
+<button class="w-full md:w-auto px-12 py-4 bg-primary text-on-primary rounded-full font-label-lg text-label-lg font-bold shadow-lg hover:shadow-xl hover:bg-primary-container active:scale-95 transition-all uppercase tracking-widest" type="submit">
+                            REGISTRAR NIÑO
+                        </button>
+</div>
+</form>
+</div>
+</main>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 bg-surface dark:bg-background shadow-[0_-2px_10px_rgba(0,0,0,0.05)] h-20 pb-safe flex justify-around items-center rounded-t-xl border-t border-outline-variant/20">
+<button class="flex flex-col items-center justify-center text-on-surface-variant active:bg-surface-container-high px-4 py-1 rounded-full">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Inicio</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-6 py-1 active:bg-surface-container-high">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">child_care</span>
+<span class="font-label-md text-label-md">Niños</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant active:bg-surface-container-high px-4 py-1 rounded-full">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Ajustes</span>
+</button>
+</nav>
+<!-- Micro-interaction Script -->
+<script>
+        // Floating label effect handler for browsers that don't support peer CSS fully or for direct styling control
+        document.querySelectorAll('input, textarea').forEach(el => {
+            el.addEventListener('blur', (e) => {
+                if(e.target.value !== "") {
+                    e.target.classList.add('not-empty');
+                } else {
+                    e.target.classList.remove('not-empty');
+                }
+            });
+        });
+
+        // Form Submission visual feedback
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = `<span class="flex items-center gap-2"><svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> REGISTRANDO...</span>`;
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                alert('Registro completado exitosamente.');
+            }, 2000);
+        });
+    </script>
+</body></html>

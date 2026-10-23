@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es-VE"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Configuración Mailjet | Reencuentro Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Config Verbatim -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-container": "#dae5ff",
+                    "on-tertiary-fixed": "#002204",
+                    "tertiary-container": "#25752b",
+                    "error": "#ba1a1a",
+                    "surface": "#f9f9ff",
+                    "surface-dim": "#d8dae2",
+                    "primary-container": "#1565c0",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#005db7",
+                    "tertiary-fixed": "#a3f69c",
+                    "inverse-primary": "#a9c7ff",
+                    "on-primary-fixed": "#001b3d",
+                    "primary-fixed": "#d6e3ff",
+                    "inverse-on-surface": "#eff0f9",
+                    "secondary-fixed-dim": "#afcbd8",
+                    "on-secondary-fixed": "#021f29",
+                    "secondary-fixed": "#cbe7f5",
+                    "surface-container-low": "#f2f3fb",
+                    "surface-container-high": "#e7e8f0",
+                    "surface-container-highest": "#e1e2ea",
+                    "error-container": "#ffdad6",
+                    "secondary-container": "#cbe7f5",
+                    "on-secondary-fixed-variant": "#304a55",
+                    "outline": "#727783",
+                    "outline-variant": "#c2c6d4",
+                    "surface-variant": "#e1e2ea",
+                    "on-primary-fixed-variant": "#00468c",
+                    "on-secondary-container": "#4e6874",
+                    "on-surface-variant": "#424752",
+                    "on-background": "#191c21",
+                    "inverse-surface": "#2e3037",
+                    "surface-container-lowest": "#ffffff",
+                    "primary": "#004d99",
+                    "tertiary": "#005c15",
+                    "tertiary-fixed-dim": "#88d982",
+                    "background": "#f9f9ff",
+                    "on-tertiary-container": "#a5f99e",
+                    "on-error-container": "#93000a",
+                    "surface-bright": "#f9f9ff",
+                    "secondary": "#48626e",
+                    "on-surface": "#191c21",
+                    "surface-container": "#ecedf6",
+                    "on-tertiary-fixed-variant": "#005312",
+                    "on-error": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed-dim": "#a9c7ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "margin-desktop": "64px",
+                    "xl": "32px",
+                    "gutter": "16px",
+                    "margin-mobile": "16px",
+                    "sm": "8px",
+                    "lg": "24px",
+                    "base": "8px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Roboto Flex"],
+                    "label-md": ["Roboto Flex"],
+                    "title-lg": ["Roboto Flex"],
+                    "body-lg": ["Roboto Flex"],
+                    "label-lg": ["Roboto Flex"],
+                    "body-md": ["Roboto Flex"],
+                    "display-lg": ["Roboto Flex"],
+                    "headline-lg": ["Roboto Flex"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Roboto Flex', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-row">
+<!-- SideNavBar (Desktop) -->
+<aside class="hidden md:flex flex-col py-lg bg-surface-container-low h-screen w-80 rounded-r-xl shadow-md sticky top-0">
+<div class="px-lg mb-xl">
+<h1 class="font-headline-lg text-headline-lg font-black text-primary">Reencuentro</h1>
+<div class="mt-md">
+<p class="font-label-lg text-label-lg font-bold text-primary">Reencuentro Admin</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Gestión de Reunificación</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center px-lg py-3 text-on-surface-variant mx-2 hover:bg-surface-container-high transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined mr-md">home</span>
+<span class="font-label-lg text-label-lg">Inicio</span>
+</a>
+<a class="flex items-center px-lg py-3 text-on-surface-variant mx-2 hover:bg-surface-container-high transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined mr-md">child_care</span>
+<span class="font-label-lg text-label-lg">Niños</span>
+</a>
+<!-- Active State: Configuración -->
+<a class="flex items-center px-lg py-3 bg-secondary-container text-on-secondary-container rounded-full mx-2 font-bold transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined mr-md">settings</span>
+<span class="font-label-lg text-label-lg">Configuración</span>
+</a>
+</nav>
+<div class="px-lg mt-auto">
+<button class="w-full py-md bg-primary text-on-primary rounded-full font-label-lg text-label-lg shadow-sm hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add</span>
+                Registrar Niño
+            </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 min-h-screen pb-24 md:pb-0">
+<!-- TopAppBar (Mobile & Desktop Header) -->
+<header class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop h-16 bg-surface shadow-sm sticky top-0 z-40">
+<div class="flex items-center gap-md">
+<span class="md:hidden material-symbols-outlined text-on-surface">menu</span>
+<h2 class="font-title-lg text-title-lg text-primary">Ajustes de Mensajería</h2>
+</div>
+<div class="flex items-center gap-md">
+<div class="hidden md:flex bg-surface-container-low rounded-full px-4 py-1.5 items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md w-48" placeholder="Buscar ajuste..." type="text"/>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary-fixed-dim flex items-center justify-center text-on-primary-fixed font-bold">
+                    AD
+                </div>
+</div>
+</header>
+<!-- Content Grid -->
+<div class="p-margin-mobile md:p-margin-desktop max-w-5xl mx-auto space-y-lg">
+<!-- Hero Status Section (Bento Style) -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="md:col-span-2 p-xl rounded-xl bg-surface-container-low flex flex-col justify-between relative overflow-hidden group">
+<div class="relative z-10">
+<h3 class="font-headline-lg text-headline-lg font-bold text-on-surface mb-sm">Integración Mailjet</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-md">
+                            Configure las credenciales de Mailjet para garantizar que las notificaciones de reunificación lleguen a los familiares de forma inmediata a través de Reencuentro.
+                        </p>
+</div>
+<!-- Status Badge -->
+<div class="mt-lg flex items-center gap-md">
+<div class="px-md py-sm bg-error-container text-on-error-container rounded-lg flex items-center gap-2 font-label-lg animate-pulse">
+<span class="material-symbols-outlined text-[18px]">error</span>
+                            Mailjet NO configurado
+                        </div>
+<span class="text-body-md text-on-surface-variant italic">Último intento: hace 2 horas</span>
+</div>
+<!-- Atmospheric Background Asset -->
+<div class="absolute right-0 top-0 w-32 h-32 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[128px] text-primary">mail</span>
+</div>
+</div>
+<div class="p-xl rounded-xl border-2 border-outline-variant border-dashed flex flex-col items-center justify-center text-center gap-md hover:border-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-primary text-[48px]">help_outline</span>
+<div>
+<p class="font-label-lg text-label-lg font-bold">¿Necesitas ayuda?</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Consulta la guía de configuración API de Reencuentro.</p>
+</div>
+</div>
+</section>
+<!-- Configuration Form -->
+<form class="space-y-lg">
+<!-- Credentials Section -->
+<div class="glass-panel p-xl rounded-xl shadow-sm">
+<div class="flex items-center gap-sm mb-lg border-b border-outline-variant pb-base">
+<span class="material-symbols-outlined text-primary">key</span>
+<h4 class="font-title-lg text-title-lg">Credenciales de API</h4>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="flex flex-col gap-xs">
+<label class="font-label-lg text-label-lg text-on-surface-variant ml-xs">Mailjet API Key</label>
+<div class="relative group">
+<input class="w-full h-14 px-md rounded-xl bg-surface-container border-none focus:ring-2 focus:ring-primary transition-all text-body-lg" id="api-key" placeholder="••••••••••••••••••••" type="password"/>
+<button class="absolute right-md top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary" onclick="togglePassword('api-key')" type="button">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-lg text-label-lg text-on-surface-variant ml-xs">Mailjet Secret Key</label>
+<div class="relative group">
+<input class="w-full h-14 px-md rounded-xl bg-surface-container border-none focus:ring-2 focus:ring-primary transition-all text-body-lg" id="secret-key" placeholder="••••••••••••••••••••" type="password"/>
+<button class="absolute right-md top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary" onclick="togglePassword('secret-key')" type="button">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- SMTP & Sender Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- SMTP Config -->
+<div class="p-xl rounded-xl bg-surface-container-lowest border border-surface-variant shadow-sm space-y-md">
+<div class="flex items-center gap-sm mb-sm">
+<span class="material-symbols-outlined text-secondary">dns</span>
+<h4 class="font-label-lg text-label-lg font-bold uppercase tracking-wider">Configuración SMTP</h4>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">Servidor SMTP</label>
+<input class="w-full h-12 px-md rounded-lg border border-outline-variant focus:border-primary focus:ring-0 text-body-md" placeholder="in-v3.mailjet.com" type="text"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">Puerto</label>
+<input class="w-full h-12 px-md rounded-lg border border-outline-variant focus:border-primary focus:ring-0 text-body-md" placeholder="587" type="number"/>
+</div>
+</div>
+<!-- Sender Info -->
+<div class="p-xl rounded-xl bg-surface-container-lowest border border-surface-variant shadow-sm space-y-md">
+<div class="flex items-center gap-sm mb-sm">
+<span class="material-symbols-outlined text-secondary">person_pin</span>
+<h4 class="font-label-lg text-label-lg font-bold uppercase tracking-wider">Remitente Autorizado</h4>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">Email del Remitente</label>
+<input class="w-full h-12 px-md rounded-lg border border-outline-variant focus:border-primary focus:ring-0 text-body-md" placeholder="reunificacion@reencuentro.org" type="email"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">Nombre para Mostrar</label>
+<input class="w-full h-12 px-md rounded-lg border border-outline-variant focus:border-primary focus:ring-0 text-body-md" placeholder="Reencuentro Sistema de Alertas" type="text"/>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex flex-col md:flex-row items-center justify-end gap-md pt-xl">
+<button class="w-full md:w-auto px-xl py-md border border-outline text-on-surface rounded-full font-label-lg text-label-lg hover:bg-surface-container-high transition-colors flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined text-[20px]">send</span>
+                        Enviar email de prueba
+                    </button>
+<button class="w-full md:w-auto px-xl py-md bg-primary text-on-primary rounded-full font-label-lg text-label-lg shadow-lg hover:shadow-xl hover:opacity-90 transition-all flex items-center justify-center gap-2" type="submit">
+<span class="material-symbols-outlined text-[20px]">save</span>
+                        GUARDAR CONFIGURACIÓN
+                    </button>
+</div>
+</form>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 bg-surface shadow-[0_-2px_10px_rgba(0,0,0,0.05)] h-20 flex justify-around items-center pb-safe rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md mt-xs">Inicio</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">child_care</span>
+<span class="font-label-md text-label-md mt-xs">Niños</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-6 py-1" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-label-md text-label-md mt-xs">Ajustes</span>
+</a>
+</nav>
+<script>
+        function togglePassword(id) {
+            const input = document.getElementById(id);
+            const btn = input.nextElementSibling.querySelector('.material-symbols-outlined');
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.innerText = 'visibility_off';
+            } else {
+                input.type = 'password';
+                btn.innerText = 'visibility';
+            }
+        }
+
+        // Simple form handling simulation
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalHtml = btn.innerHTML;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Guardando...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> ¡Guardado!';
+                btn.classList.replace('bg-primary', 'bg-tertiary-container');
+                btn.classList.replace('text-on-primary', 'text-on-tertiary-container');
+                
+                // Update status badge simulation
+                const badge = document.querySelector('.bg-error-container');
+                if(badge) {
+                    badge.classList.replace('bg-error-container', 'bg-tertiary-container');
+                    badge.classList.replace('text-on-error-container', 'text-on-tertiary-container');
+                    badge.innerHTML = '<span class="material-symbols-outlined text-[18px]">verified</span> Mailjet Configurado';
+                    badge.classList.remove('animate-pulse');
+                }
+            }, 1500);
+        });
+    </script>
+</body></html>
