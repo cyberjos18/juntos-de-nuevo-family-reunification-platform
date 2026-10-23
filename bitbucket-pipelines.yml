@@ -1,0 +1,184 @@
+image: php:8.4-cli
+
+definitions:
+  services:
+    mysql:
+      image: mysql:8.0
+      variables:
+        MYSQL_DATABASE: findchild_testing
+        MYSQL_USER: findchild_ci
+        MYSQL_PASSWORD: findchild_ci_password
+        MYSQL_ROOT_PASSWORD: root_ci_password
+
+pipelines:
+  branches:
+    pre-production:
+      - step:
+          name: CI - Preparar base de datos y ejecutar pruebas
+
+          caches:
+            - composer
+
+          services:
+            - mysql
+
+          script:
+            # Detener el pipeline ante cualquier error
+            - set -e
+
+            # ---------------------------------------------------
+            # 1. Instalar herramientas y extensiones de PHP
+            # ---------------------------------------------------
+            - apt-get update
+            - apt-get install -y --no-install-recommends git unzip curl libzip-dev libpng-dev libjpeg-dev libfreetype6-dev libonig-dev default-mysql-client
+
+            - docker-php-ext-configure gd --with-jpeg --with-freetype
+            - docker-php-ext-install pdo_mysql zip mbstring gd bcmath
+
+            # ---------------------------------------------------
+            # 2. Instalar Composer
+            # ---------------------------------------------------
+            - curl -sS https://getcomposer.org/installer -o composer-setup.php
+            - php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+            - rm composer-setup.php
+
+            - export COMPOSER_ALLOW_SUPERUSER=1
+
+            # ---------------------------------------------------
+            # 3. Definir rutas del proyecto
+            # ---------------------------------------------------
+            - export APP_DIR="$BITBUCKET_CLONE_DIR/juntos-de-nuevo"
+            - export SQL_DIR="$APP_DIR/docs"
+
+            - cd "$APP_DIR"
+
+            # ---------------------------------------------------
+            # 4. Configurar Laravel para testing
+            # ---------------------------------------------------
+            - export APP_ENV=testing
+            - export APP_DEBUG=true
+            - export APP_KEY="base64:$(php -r 'echo base64_encode(random_bytes(32));')"
+
+            - export DB_CONNECTION=mysql
+            - export DB_HOST=127.0.0.1
+            - export DB_PORT=3306
+            - export DB_DATABASE=findchild_testing
+            - export DB_USERNAME=findchild_ci
+            - export DB_PASSWORD=findchild_ci_password
+
+            # Configuración segura para el entorno de pruebas
+            - export CACHE_STORE=array
+            - export SESSION_DRIVER=array
+            - export QUEUE_CONNECTION=sync
+            - export MAIL_MAILER=array
+
+            # ---------------------------------------------------
+            # 5. Mostrar versiones utilizadas
+            # ---------------------------------------------------
+            - echo "Versión de PHP"
+            - php -v
+
+            - echo "Versión de Composer"
+            - composer --version
+
+            # ---------------------------------------------------
+            # 6. Validar e instalar dependencias
+            # ---------------------------------------------------
+            - echo "Validando composer.json"
+            - composer validate --no-check-publish
+
+            - echo "Instalando dependencias"
+            - composer install --prefer-dist --no-interaction --no-progress
+
+            # ---------------------------------------------------
+            # 7. Esperar a que MySQL esté disponible
+            # ---------------------------------------------------
+            - echo "Esperando a que MySQL esté disponible"
+
+            - >
+              until MYSQL_PWD="$DB_PASSWORD"
+              mysql
+              --protocol=TCP
+              -h "$DB_HOST"
+              -P "$DB_PORT"
+              -u "$DB_USERNAME"
+              "$DB_DATABASE"
+              -e "SELECT 1"
+              >/dev/null 2>&1;
+              do
+                echo "MySQL todavía no está disponible";
+                sleep 2;
+              done
+
+            - echo "MySQL está disponible"
+
+            # ---------------------------------------------------
+            # 8. Comprobar que existen los scripts SQL
+            # ---------------------------------------------------
+            - echo "Comprobando scripts SQL"
+
+            - test -f "$SQL_DIR/database-script.sql"
+            - test -f "$SQL_DIR/laravel-aux-tables.sql"
+            - test -f "$SQL_DIR/configuracion-table.sql"
+
+            # ---------------------------------------------------
+            # 9. Importar schema + datos de prueba (fixtures) desde docs/
+            # ---------------------------------------------------
+            # Los tests (tests/Helpers.php: adminUser(), gestorUser(), etc.) dependen de que
+            # existan las filas de prueba (admin@findchild.org, ninos, recogidas...) que trae
+            # database-script.sql. No se recorta el archivo: se importa completo.
+            # No usamos migraciones Laravel: el schema vive únicamente en estos scripts.
+
+            - echo "Importando estructura principal + datos de prueba"
+
+            - >
+              MYSQL_PWD="$DB_PASSWORD"
+              mysql
+              --protocol=TCP
+              -h "$DB_HOST"
+              -P "$DB_PORT"
+              -u "$DB_USERNAME"
+              "$DB_DATABASE"
+              < "$SQL_DIR/database-script.sql"
+
+            # ---------------------------------------------------
+            # 10. Importar tablas auxiliares de Laravel
+            # ---------------------------------------------------
+            - echo "Importando tablas auxiliares de Laravel"
+
+            - >
+              MYSQL_PWD="$DB_PASSWORD"
+              mysql
+              --protocol=TCP
+              -h "$DB_HOST"
+              -P "$DB_PORT"
+              -u "$DB_USERNAME"
+              "$DB_DATABASE"
+              < "$SQL_DIR/laravel-aux-tables.sql"
+
+            # ---------------------------------------------------
+            # 11. Importar tabla de configuración
+            # ---------------------------------------------------
+            - echo "Importando tabla de configuración"
+
+            - >
+              MYSQL_PWD="$DB_PASSWORD"
+              mysql
+              --protocol=TCP
+              -h "$DB_HOST"
+              -P "$DB_PORT"
+              -u "$DB_USERNAME"
+              "$DB_DATABASE"
+              < "$SQL_DIR/configuracion-table.sql"
+
+            # ---------------------------------------------------
+            # 12. Limpiar la configuración almacenada de Laravel
+            # ---------------------------------------------------
+            - echo "Limpiando configuración de Laravel"
+            - php artisan config:clear
+
+            # ---------------------------------------------------
+            # 13. Ejecutar las pruebas
+            # ---------------------------------------------------
+            - echo "Ejecutando pruebas automatizadas"
+            - php artisan test
