@@ -1,0 +1,45 @@
+@import 'tailwindcss';
+
+/* Alpine.js x-cloak: hides elements until Alpine initializes */
+[x-cloak] { display: none !important; }
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-sans: 'Roboto', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --color-primary: #1565C0;
+    --color-on-primary: #FFFFFF;
+    --color-primary-container: #D1E4FF;
+    --color-on-primary-container: #001D35;
+
+    --color-secondary: #546E7A;
+    --color-on-secondary: #FFFFFF;
+    --color-secondary-container: #E0E7EE;
+    --color-on-secondary-container: #112B3C;
+
+    --color-tertiary: #2E7D32;
+    --color-on-tertiary: #FFFFFF;
+    --color-tertiary-container: #C8E6C9;
+
+    --color-error: #D32F2F;
+    --color-on-error: #FFFFFF;
+    --color-error-container: #FFCDD2;
+
+    --color-background: #F5F7FA;
+    --color-surface: #FFFFFF;
+    --color-surface-variant: #E8EDF2;
+    --color-outline: #B0BEC5;
+    --color-outline-variant: #DDE3E9;
+
+    --color-on-background: #1A1C1E;
+    --color-on-surface: #1A1C1E;
+    --color-on-surface-variant: #43474E;
+
+    --color-estado-encontrado: #1565C0;
+    --color-estado-familia-localizada: #F57C00;
+    --color-estado-recogido: #2E7D32;
+    --color-estado-otro-centro: #78909C;
+}
