@@ -1,0 +1,144 @@
+name: CI
+
+on:
+  push:
+    branches: [main, pre-production]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    name: Prepare database and run tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: findchild_testing
+          MYSQL_USER: findchild_ci
+          MYSQL_PASSWORD: findchild_ci_password
+          MYSQL_ROOT_PASSWORD: root_ci_password
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -proot_ci_password"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+
+    env:
+      # Laravel reads these from the real environment: there is no .env file in
+      # CI. They also take precedence over the <env> entries in phpunit.xml,
+      # which PHPUnit only applies when the variable is not already set.
+      APP_ENV: testing
+      APP_DEBUG: 'true'
+
+      DB_CONNECTION: mysql
+      DB_HOST: 127.0.0.1
+      DB_PORT: '3306'
+      DB_DATABASE: findchild_testing
+      DB_USERNAME: findchild_ci
+      DB_PASSWORD: findchild_ci_password
+
+      # Keep the test run free of external side effects.
+      CACHE_STORE: array
+      SESSION_DRIVER: array
+      QUEUE_CONNECTION: sync
+      MAIL_MAILER: array
+
+    defaults:
+      run:
+        working-directory: juntos-de-nuevo
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up PHP 8.4
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: pdo_mysql, zip, mbstring, gd, bcmath
+          tools: composer:v2
+          coverage: none
+
+      - name: Install the MySQL client
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends mysql-client
+
+      - name: Generate an application key
+        run: echo "APP_KEY=base64:$(php -r 'echo base64_encode(random_bytes(32));')" >> "$GITHUB_ENV"
+
+      - name: Show the versions in use
+        run: |
+          php -v
+          composer --version
+
+      - name: Validate composer.json
+        run: composer validate --no-check-publish
+
+      - name: Cache the Composer packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/composer/files
+          key: composer-${{ runner.os }}-php8.4-${{ hashFiles('juntos-de-nuevo/composer.lock') }}
+          restore-keys: composer-${{ runner.os }}-php8.4-
+
+      - name: Install the dependencies
+        run: composer install --prefer-dist --no-interaction --no-progress
+
+      - name: Wait for MySQL to accept connections
+        run: |
+          for attempt in $(seq 1 60); do
+            if MYSQL_PWD="$DB_PASSWORD" mysql --protocol=TCP \
+              -h "$DB_HOST" -P "$DB_PORT" -u "$DB_USERNAME" "$DB_DATABASE" \
+              -e "SELECT 1" >/dev/null 2>&1
+            then
+              echo "MySQL is available after $attempt attempt(s)"
+              exit 0
+            fi
+            echo "MySQL is not available yet (attempt $attempt/60)"
+            sleep 2
+          done
+          echo "MySQL did not become available within 120 seconds" >&2
+          exit 1
+
+      - name: Check that the SQL scripts exist
+        run: |
+          test -f docs/database-script.sql
+          test -f docs/laravel-aux-tables.sql
+          test -f docs/configuracion-table.sql
+
+      # The schema lives only in these scripts -- Laravel migrations do not
+      # create it. The fixtures in database-script.sql are imported in full
+      # because tests/Helpers.php (adminUser(), gestorUser(), ...) depends on
+      # the rows it inserts.
+      - name: Import the main schema and the test fixtures
+        run: |
+          MYSQL_PWD="$DB_PASSWORD" mysql --protocol=TCP \
+            -h "$DB_HOST" -P "$DB_PORT" -u "$DB_USERNAME" "$DB_DATABASE" \
+            < docs/database-script.sql
+
+      - name: Import the Laravel auxiliary tables
+        run: |
+          MYSQL_PWD="$DB_PASSWORD" mysql --protocol=TCP \
+            -h "$DB_HOST" -P "$DB_PORT" -u "$DB_USERNAME" "$DB_DATABASE" \
+            < docs/laravel-aux-tables.sql
+
+      - name: Import the configuration table
+        run: |
+          MYSQL_PWD="$DB_PASSWORD" mysql --protocol=TCP \
+            -h "$DB_HOST" -P "$DB_PORT" -u "$DB_USERNAME" "$DB_DATABASE" \
+            < docs/configuracion-table.sql
+
+      - name: Clear the cached Laravel configuration
+        run: php artisan config:clear
+
+      - name: Run the test suite
+        run: php artisan test
